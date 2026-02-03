@@ -1788,11 +1788,7 @@ body {
     }
 
     .vscode-window {
-        position: relative;
-        right: auto;
-        top: auto;
-        margin: 2rem auto;
-        max-width: 100%;
+        display: none;
     }
 
     .hero-text {
