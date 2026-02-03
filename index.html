@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Matheus Campos - Software Developer Full Stack">
+    <title>Matheus Campos - Software Developer</title>
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const theme = savedTheme || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <button class="nav-btn" onclick="scrollToSection('about')">Sobre</button>
+            <button class="nav-btn" onclick="scrollToSection('projects')">Projetos</button>
+            <button class="nav-btn" onclick="scrollToSection('contact')">Contato</button>
+            <div class="nav-divider"></div>
+            <div class="experience-selector">
+                <button class="nav-btn" onclick="toggleExperienceMenu()">
+                    Experiências
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="nav-chevron">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </button>
+                <div id="experience-menu" class="experience-menu hidden">
+                    <button class="experience-item active" onclick="selectExperience('atual')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                        <div class="exp-info">
+                            <span class="exp-title">Software Developer</span>
+                            <span class="exp-company">Meeta Solutions</span>
+                        </div>
+                        <span class="exp-badge">Atual</span>
+                    </button>
+                    <button class="experience-item" onclick="selectExperience('analista')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                        <div class="exp-info">
+                            <span class="exp-title">Analista de Suporte Jr</span>
+                            <span class="exp-company">Meeta Solutions</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="nav-divider"></div>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+                <svg class="moon-icon hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="decoration-element terminal-element">
+            <svg width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="m4 17 6-6-6-6M12 19h8"/>
+            </svg>
+        </div>
+        <div class="decoration-element braces-element">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m0 8v3a2 2 0 0 0 2 2h3m8-18h3a2 2 0 0 1 2 2v3m0 8v3a2 2 0 0 1-2 2h-3"/>
+            </svg>
+        </div>
+        <div class="decoration-element cpu-element">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+                <rect x="9" y="9" width="6" height="6"/>
+                <path d="M15 2v2M15 20v2M9 2v2M9 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/>
+            </svg>
+        </div>
+        <div class="decoration-element git-element">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="18" r="3"/>
+                <circle cx="6" cy="6" r="3"/>
+                <circle cx="18" cy="6" r="3"/>
+                <path d="M6 9v1a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V9"/>
+                <path d="M12 12v3"/>
+            </svg>
+        </div>
+
+        <div class="vscode-window">
+            <div class="vscode-titlebar">
+                <div class="vscode-buttons">
+                    <div class="vscode-btn vs-btn-red"></div>
+                    <div class="vscode-btn vs-btn-yellow"></div>
+                    <div class="vscode-btn vs-btn-green"></div>
+                </div>
+                <div class="vscode-filename">developer.py</div>
+            </div>
+            <div class="vscode-content">
+                <div class="vscode-linenumbers">
+                    <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div>
+                </div>
+                <div class="vscode-code">
+                    <div><span class="kw-purple">class </span> <span class="kw-yellow">Developer</span>:</div>
+                    <div>    <span class="kw-purple">def </span> <span class="kw-blue">__init__</span>(<span class="kw-orange">self</span>):</div>
+                    <div>        <span class="kw-orange">self</span>.name = <span class="kw-green">"Matheus Campos"</span></div>
+                    <div>        <span class="kw-orange">self</span>.role = <span class="kw-green">"Full Stack"</span></div>
+                    <div>        <span class="kw-orange">self</span>.stack = [<span class="kw-green">"Python"</span>, <span class="kw-green">"FastAPI"</span>, <span class="kw-green">"React.js"</span>]</div>
+                    <div></div>
+                    <div>    <span class="kw-purple">async def </span> <span class="kw-blue">develop</span>(<span class="kw-orange">self</span>):</div>
+                    <div>        <span class="kw-purple">return</span> <span class="kw-gray">{</span></div>
+                    <div>            <span class="kw-green">"backend"</span>: <span class="kw-purple">await</span> <span class="kw-orange">self</span>.<span class="kw-blue">create_apis</span>(),</div>
+                    <div>            <span class="kw-green">"frontend"</span>: <span class="kw-purple">await</span> <span class="kw-orange">self</span>.<span class="kw-blue">create_interfaces</span>(),</div>
+                    <div>            <span class="kw-green">"quality"</span>: <span class="kw-green">"high"</span>,</div>
+                    <div>            <span class="kw-green">"performance"</span>: <span class="kw-green">"optimized"</span></div>
+                    <div>        <span class="kw-gray">}</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-greeting">Olá, eu sou</p>
+                <h1 class="hero-name"><span class="name-text">Matheus Campos</span></h1>
+                <div class="hero-badges">
+                    <div class="badge">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m4 17 6-6-6-6M12 19h8"/>
+                        </svg>
+                        Software Developer
+                    </div>
+                    <div class="badge secondary">Backend & Frontend</div>
+                </div>
+                <p class="hero-description">Desenvolvedor de Software com foco em Backend e Full Stack, atuando no desenvolvimento de APIs REST escaláveis e de alta performance utilizando Python e FastAPI.</p>
+                <div class="hero-social">
+                    <a href="https://github.com/prophantasia" target="_blank" rel="noopener noreferrer" class="social-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                            <path d="M9 18c-4.51 2-5-2-7-2"/>
+                        </svg>
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/matheus-c-developer" target="_blank" rel="noopener noreferrer" class="social-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a href="mailto:matheusxp100@hotmail.com" class="social-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect width="20" height="16" x="2" y="4" rx="2"/>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                        </svg>
+                        Email
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-arrow" onclick="scrollToHeroEnd()" aria-label="Scroll down">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m6 9 6 6 6-6"/>
+            </svg>
+        </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Sobre Mim</span>
+                <h2 class="section-title">Minha Jornada Profissional</h2>
+                <p class="section-subtitle">Desenvolvedor de software com foco em backend e contribuições estratégicas para evolução de sistemas</p>
+            </div>
+            
+            <!-- Current Experience Card -->
+            <div class="experience-card current-exp-card">
+                <div class="card-header">
+                    <div class="card-header-left">
+                        <div class="card-icon-large bg-primary">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                            </svg>
+                        </div>
+                        <div class="card-header-info">
+                            <h3 class="card-title">Desenvolvedor de Software</h3>
+                            <span class="current-badge">Atual</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Meeta Solutions · São Paulo, SP</div>
+                <div class="card-content">
+                    <div class="exp-info">
+                        <span class="exp-info-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" x2="16" y1="2" y2="6"/>
+                                <line x1="8" x2="8" y1="2" y2="6"/>
+                                <line x1="3" x2="21" y1="10" y2="10"/>
+                            </svg>
+                            abr/2025 - presente
+                        </span>
+                        <span class="exp-info-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            São Paulo, Brasil
+                        </span>
+                    </div>
+                    <p class="card-description">Sou Desenvolvedor de Software com foco em Backend e Full Stack, atuando no desenvolvimento de APIs REST escaláveis e de alta performance utilizando Python e FastAPI, seguindo boas práticas de engenharia de software.</p>
+                    
+                    <div class="responsibilities">
+                        <h4>Principais Responsabilidades</h4>
+                        <ul>
+                            <li>Desenvolvimento de APIs REST escaláveis e de alta performance utilizando Python e FastAPI</li>
+                            <li>Sólida experiência com bancos de dados relacionais (SQL Server, MySQL) e NoSQL (MongoDB)</li>
+                            <li>Desenvolvimento de integrações entre sistemas e clientes em Python</li>
+                            <li>Implementação de frontend responsivo com React.js, JavaScript, HTML e CSS</li>
+                            <li>DevOps com Docker, Git, GitHub Actions e pipelines de CI/CD</li>
+                            <li>Observabilidade e monitoramento com Grafana e Zabbix para métricas e logs</li>
+                            <li>Integração com Databricks implementando Arquitetura Medallion (Bronze, Silver, Gold)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="results">
+                        <h4>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
+                                <line x1="9" x2="9" y1="9" y2="9"/>
+                                <line x1="15" x2="15" y1="9" y2="9"/>
+                            </svg>
+                            Resultados
+                        </h4>
+                        <ul>
+                            <li>APIs escaláveis com alta performance e boas práticas de engenharia</li>
+                            <li>Sistemas integrados com estabilidade e manutenibilidade</li>
+                            <li>Monitoramento proativo com dashboards e alertas</li>
+                            <li>Arquitetura de dados eficiente com governança e qualidade</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Previous Experience Card -->
+            <div class="experience-card">
+                <div class="card-header">
+                    <div class="card-header-left">
+                        <div class="card-icon-large bg-primary-light">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="card-header-info">
+                            <h3 class="card-title">Analista de Suporte Jr</h3>
+                            <span class="exp-badge">Meeta Solutions</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">São Paulo, SP · Janeiro 2024 - Março 2025 (1 ano 3 meses)</div>
+                <div class="card-content">
+                    <div class="exp-info">
+                        <span class="exp-info-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" x2="16" y1="2" y2="6"/>
+                                <line x1="8" x2="8" y1="2" y2="6"/>
+                                <line x1="3" x2="21" y1="10" y2="10"/>
+                            </svg>
+                            jan/2024 - mar/2025
+                        </span>
+                        <span class="exp-info-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            São Paulo, Brasil
+                        </span>
+                    </div>
+                    <p class="card-description">Trabalhei prestando suporte técnico de forma estratégica, incluindo atendimento in loco em um cliente no Rio de Janeiro, sendo reconhecido pela qualidade do atendimento, postura profissional e capacidade de resolver problemas complexos.</p>
+                    
+                    <div class="responsibilities">
+                        <h4>Principais Entregas e Responsabilidades</h4>
+                        <ul>
+                            <li>Atendimento técnico in loco ao cliente no Rio de Janeiro, garantindo rápida resposta e alta qualidade na resolução de incidentes</li>
+                            <li>Atuação na identificação, análise e solução de problemas técnicos do nível 1 ao nível 3 (N1–N3)</li>
+                            <li>Reconhecimento recorrente pela excelência no atendimento ao usuário e pela comunicação clara e eficiente</li>
+                            <li>Implementação de solução de observabilidade com Grafana e Zabbix, aumentando a visibilidade e o controle dos sistemas</li>
+                            <li>Criação de dashboards e alertas para monitoramento de serviços e infraestrutura</li>
+                            <li>Apoio à melhoria contínua dos processos de suporte e estabilidade dos ambientes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="results">
+                        <h4>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
+                                <line x1="9" x2="9" y1="9" y2="9"/>
+                                <line x1="15" x2="15" y1="9" y2="9"/>
+                            </svg>
+                            Resultados
+                        </h4>
+                        <ul>
+                            <li>Redução do tempo de resolução de incidentes críticos</li>
+                            <li>Excelência no atendimento ao cliente no Rio de Janeiro</li>
+                            <li>Melhoria na estabilidade dos sistemas monitorados</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <section id="projects" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Projetos</span>
+                <h2 class="section-title">Projetos Recentes</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="card project-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">APIs Backend</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Desenvolvimento e manutenção de APIs REST escaláveis utilizando Python e FastAPI, seguindo boas práticas de engenharia de software.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card project-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Integrações de Sistemas</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Desenvolvimento de integrações entre sistemas, clientes em Python, troubleshooting e otimização de aplicações, sempre com foco em estabilidade, escalabilidade, manutenibilidade e qualidade de código.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Git</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">CI/CD</span>
+                            <span class="tech-tag">GitHub Actions</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card project-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18M9 21V9"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Dashboard Frontend</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Desenvolvimento de interfaces responsivas utilizando React.js, JavaScript, HTML e CSS.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card project-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                                <path d="M3 9h18"/>
+                                <path d="M9 21V9"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Observabilidade</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Implementação de observabilidade e monitoramento, integrando Grafana e Zabbix para acompanhamento de métricas, logs e saúde das aplicações.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Grafana</span>
+                            <span class="tech-tag">Zabbix</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Monitoring</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <section id="stacks" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Stacks</span>
+                <h2 class="section-title">Tecnologias que Utilizo</h2>
+            </div>
+            <div class="stacks-grid">
+                <div class="card stack-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Linguagens</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card stack-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Frameworks</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-tags">
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">Flask</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card stack-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Bancos de Dados</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-tags">
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Azure Databricks</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card stack-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Autenticação</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-tags">
+                            <span class="tech-tag">OAuth2</span>
+                            <span class="tech-tag">Microsoft SSO</span>
+                            <span class="tech-tag">Google SSO</span>
+                            <span class="tech-tag">JWT</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card stack-card">
+                    <div class="card-header">
+                        <h3 class="card-title">DevOps & Cloud</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-tags">
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Git</span>
+                            <span class="tech-tag">GitHub Actions</span>
+                            <span class="tech-tag">CI/CD</span>
+                            <span class="tech-tag">Azure</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card stack-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Monitoramento</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="tech-tags">
+                            <span class="tech-tag">Grafana</span>
+                            <span class="tech-tag">Zabbix</span>
+                            <span class="tech-tag">Observabilidade</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <section id="contact" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Contato</span>
+                <h2 class="section-title">Entre em Contato</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <div class="card-header">
+                        <h3 class="card-title">Links Sociais</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="social-links">
+                            <a href="https://github.com/prophantasia" target="_blank" rel="noopener noreferrer" class="social-link">
+                                <div class="social-icon-large">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                                        <path d="M9 18c-4.51 2-5-2-7-2"/>
+                                    </svg>
+                                </div>
+                                <div class="social-info">
+                                    <span class="social-name">GitHub</span>
+                                    <span class="social-handle">@prophantasia</span>
+                                </div>
+                            </a>
+                            <a href="https://linkedin.com/in/matheus-c-developer" target="_blank" rel="noopener noreferrer" class="social-link">
+                                <div class="social-icon-large">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                        <rect x="2" y="9" width="4" height="12"/>
+                                        <circle cx="4" cy="4" r="2"/>
+                                    </svg>
+                                </div>
+                                <div class="social-info">
+                                    <span class="social-name">LinkedIn</span>
+                                    <span class="social-handle">matheus-c-developer</span>
+                                </div>
+                            </a>
+                            <a href="mailto:matheusxp100@hotmail.com" class="social-link">
+                                <div class="social-icon-large">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect width="20" height="16" x="2" y="4" rx="2"/>
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                                    </svg>
+                                </div>
+                                <div class="social-info">
+                                    <span class="social-name">Email</span>
+                                    <span class="social-handle">matheusxp100@hotmail.com</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">&copy; <span id="current-year"></span> Matheus Campos. Software Developer - Full Stack. Todos os direitos reservados.</p>
+            <p class="footer-subtext">Desenvolvido com HTML, CSS e JavaScript</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
