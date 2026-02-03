@@ -1,3 +1,45 @@
+// Custom Cursor
+const customCursor = document.getElementById('custom-cursor');
+
+document.addEventListener('mousemove', (e) => {
+    if (customCursor) {
+        customCursor.style.left = e.clientX - 10 + 'px';
+        customCursor.style.top = e.clientY - 10 + 'px';
+    }
+});
+
+// Hover effects on links and buttons
+const interactiveElements = document.querySelectorAll('a, button, .nav-btn, .social-btn, .social-link');
+
+interactiveElements.forEach(element => {
+    element.addEventListener('mouseenter', () => {
+        if (customCursor) {
+            customCursor.style.transform = 'scale(1.3) rotate(5deg)';
+            customCursor.style.transition = 'transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        }
+    });
+
+    element.addEventListener('mouseleave', () => {
+        if (customCursor) {
+            customCursor.style.transform = 'scale(1) rotate(0deg)';
+            customCursor.style.transition = 'transform 0.2s ease-out';
+        }
+    });
+});
+
+// Click animation
+document.addEventListener('mousedown', () => {
+    if (customCursor) {
+        customCursor.style.transform = 'scale(0.8) rotate(-5deg)';
+    }
+});
+
+document.addEventListener('mouseup', () => {
+    if (customCursor) {
+        customCursor.style.transform = 'scale(1) rotate(0deg)';
+    }
+});
+
 // Theme Toggle
 function toggleTheme() {
     const html = document.documentElement;
